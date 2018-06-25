@@ -2163,7 +2163,6 @@ changes:
 * `keylen` {number}
 * `options` {Object}
   - `cost` {number} CPU/memory cost parameter. Must be a power of two greater
-  - `N` {number} CPU/memory cost parameter. Must be a power of two greater
     than one. **Default:** `16384`.
   - `blockSize` {number} Block size parameter. **Default:** `8`.
   - `parallelization` {number} Parallelization parameter. **Default:** `1`.
@@ -2218,7 +2217,6 @@ changes:
 * `keylen` {number}
 * `options` {Object}
   - `cost` {number} CPU/memory cost parameter. Must be a power of two greater
-  - `N` {number} CPU/memory cost parameter. Must be a power of two greater
     than one. **Default:** `16384`.
   - `blockSize` {number} Block size parameter. **Default:** `8`.
   - `parallelization` {number} Parallelization parameter. **Default:** `1`.
