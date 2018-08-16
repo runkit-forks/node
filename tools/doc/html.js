@@ -190,6 +190,9 @@ function preprocessElements({ filename }) {
           }];
         }
 
+      } else if (node.type === 'code') {
+        node.type = "html";
+        node.value = `<pre><code class = 'language-${node.lang}'>${node.value}</code></pre>`;
       } else if (node.type === 'html' && common.isYAMLBlock(node.value)) {
         node.value = parseYAML(node.value);
 
