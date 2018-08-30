@@ -9,8 +9,6 @@
     
     script.onload = function ()
     {
-        var runnable = document.querySelectorAll(".runkit");
-
         for (var index = 0; index < runnable.length; ++index)
         {
             var element = runnable.item(index).parentNode;

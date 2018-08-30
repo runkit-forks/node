@@ -32,6 +32,7 @@ const raw = require('rehype-raw');
 const htmlStringify = require('rehype-stringify');
 const path = require('path');
 const typeParser = require('./type-parser.js');
+const { highlight, getLanguage } = require('highlightjs');
 
 module.exports = {
   toHTML, firstHeader, preprocessText, preprocessElements, buildToc
@@ -191,8 +192,12 @@ function preprocessElements({ filename }) {
         }
 
       } else if (node.type === 'code') {
+        const language = node.lang.split(" ")[0];
+        const highlighted = getLanguage(language) ?
+            highlight(language, node.value).value :
+            node.value;
         node.type = "html";
-        node.value = `<pre><code class = 'language-${node.lang}'>${node.value}</code></pre>`;
+        node.value = `<pre><code class = 'language-${node.lang}'>${highlighted}</code></pre>`;
       } else if (node.type === 'html' && common.isYAMLBlock(node.value)) {
         node.value = parseYAML(node.value);
 
