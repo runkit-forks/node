@@ -9,7 +9,7 @@ NodePlugin.RULES_DIR = path.resolve(__dirname, 'tools', 'eslint-rules');
 const ModuleFindPath = Module._findPath;
 const hacks = [
   'eslint-plugin-node-core',
-  'eslint-plugin-markdown-runkit',
+  'eslint-plugin-markdown',
   'babel-eslint',
 ];
 Module._findPath = (request, paths, isMain) => {
@@ -27,7 +27,7 @@ Module._findPath = (request, paths, isMain) => {
 
 module.exports = {
   root: true,
-  plugins: ['markdown-runkit', 'node-core'],
+  plugins: ['markdown', 'node-core'],
   env: { node: true, es6: true },
   parser: 'babel-eslint',
   parserOptions: { sourceType: 'script' },
