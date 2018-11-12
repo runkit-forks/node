@@ -1,5 +1,4 @@
-(function ()
-{
+(function () {
     if (window.NodeList && !NodeList.prototype.forEach)
         NodeList.prototype.forEach = Array.prototype.forEach;
 
@@ -10,17 +9,28 @@
 
     var script = document.createElement("script");
     
-    script.onload = function ()
-    {
+    script.onload = function () {
         runnables.forEach(function (runnable) {
-            var elt = runnable.parentNode;
-            var src = RunKit.sourceFromElement(elt);
-            var onLoad = function() {
-                for (var i = elt.childNodes.length - 1; i >= 0; i--)
-                    if (elt.childNodes[i].tagName !== 'IFRAME')
-                        elt.removeChild(elt.childNodes[i]);
-            }
-            RunKit.createNotebook({ element: elt, source: src, onLoad: onLoad });
+            var parent = runnable.parentNode;
+            var wrapper = document.createElement('div');
+            wrapper.style.position = 'absolute';
+            wrapper.style.top = '0';
+            wrapper.style.left = '-9999px';
+            wrapper.className = 'runkit-wrapper';
+            parent.insertBefore(wrapper, parent.firstChild);
+            RunKit.createNotebook({
+                element: wrapper,
+                source: RunKit.sourceFromElement(parent),
+                onLoad: function() {
+                    for (var i = parent.childNodes.length - 1; i >= 0; i--) {
+                        if (parent.childNodes[i].className !== 'runkit-wrapper') {
+                            parent.removeChild(parent.childNodes[i]);
+                        }
+                    }
+                    wrapper.style.cssText = '';
+                },
+                autoEval: true,
+            });
         });
     }
 
