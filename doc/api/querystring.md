@@ -74,11 +74,12 @@ By default, percent-encoded characters within the query string will be assumed
 to use UTF-8 encoding. If an alternative character encoding is used, then an
 alternative `decodeURIComponent` option will need to be specified:
 
-```js
-// Assuming gbkDecodeURIComponent function already exists...
+```js runkit
+const querystring = require('querystring');
+const urlcharset = require('urlcharset'); // 3rd party library that provides a decodeURIComponent implementation
 
 querystring.parse('w=%D6%D0%CE%C4&foo=bar', null, null,
-                  { decodeURIComponent: gbkDecodeURIComponent });
+                  { decodeURIComponent: urlcharset.decodeUriComponent('gbk') });
 ```
 
 ## querystring.stringify(obj[, sep[, eq[, options]]])
@@ -117,11 +118,12 @@ By default, characters requiring percent-encoding within the query string will
 be encoded as UTF-8. If an alternative encoding is required, then an alternative
 `encodeURIComponent` option will need to be specified:
 
-```js
-// Assuming gbkEncodeURIComponent function already exists,
+```js runkit
+const querystring = require('querystring');
+const urlcharset = require('urlcharset'); // 3rd party library that provides an encodeURIComponent implementation
 
 querystring.stringify({ w: '中文', foo: 'bar' }, null, null,
-                      { encodeURIComponent: gbkEncodeURIComponent });
+                      { encodeURIComponent: urlcharset.encodeUriComponent('gbk') });
 ```
 
 ## querystring.unescape(str)
