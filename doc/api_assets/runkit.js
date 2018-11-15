@@ -20,6 +20,7 @@
             replace.parentNode.insertBefore(wrapper, replace);
             RunKit.createNotebook({
                 element: wrapper,
+                minHeight: '0px',
                 source: RunKit.sourceFromElement(replace),
                 onLoad: function(notebook) {
                     for (var i = replace.childNodes.length - 1; i >= 0; i--) {
