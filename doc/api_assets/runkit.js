@@ -11,25 +11,25 @@
     
     script.onload = function () {
         runnables.forEach(function (runnable) {
-            var parent = runnable.parentNode;
+            var replace = runnable.parentNode;
             var wrapper = document.createElement('div');
             wrapper.style.position = 'absolute';
             wrapper.style.top = '0';
             wrapper.style.left = '-9999px';
             wrapper.className = 'runkit-wrapper';
-            parent.insertBefore(wrapper, parent.firstChild);
+            replace.parentNode.insertBefore(wrapper, replace);
             RunKit.createNotebook({
                 element: wrapper,
-                source: RunKit.sourceFromElement(parent),
-                onLoad: function() {
-                    for (var i = parent.childNodes.length - 1; i >= 0; i--) {
-                        if (parent.childNodes[i].className !== 'runkit-wrapper') {
-                            parent.removeChild(parent.childNodes[i]);
+                source: RunKit.sourceFromElement(replace),
+                onLoad: function(notebook) {
+                    for (var i = replace.childNodes.length - 1; i >= 0; i--) {
+                        if (replace.childNodes[i].className !== 'runkit-wrapper') {
+                            replace.parentNode.removeChild(replace);
                         }
                     }
-                    wrapper.style.cssText = '';
+                    wrapper.style.cssText = 'margin: 1rem;';
+                    notebook.evaluate();
                 },
-                autoEval: true,
             });
         });
     }
