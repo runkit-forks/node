@@ -32,6 +32,11 @@
 
 (function() {
   var runnables = document.querySelectorAll('.runkit');
+  var version = document
+    .querySelector('meta[name="nodejs.org:node-version"]')
+    .content;
+  var major = version.match(/v(0\.\d+|\d+)/)[1];
+  var nodeRange = major + (/\./g.test(major) ? ".x" : ".x.x");
   runnables.forEach(function(runnable) {
     var source = RunKit.sourceFromElement(runnable);
     var wrapper = document.createElement('div');
@@ -41,6 +46,7 @@
       element: wrapper,
       minHeight: '0px',
       source: source,
+      nodeVersion: nodeRange
     });
     runnable.parentElement.replaceWith(wrapper);
   });
